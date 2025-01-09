@@ -1,11 +1,8 @@
 cmake_minimum_required(VERSION 3.10)
 project(uds LANGUAGES C)
 
-# Define the source and header files
-#file(GLOB_RECURSE UDS_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/src/*.c)
-#file(GLOB_RECURSE UDS_HEADERS ${CMAKE_CURRENT_SOURCE_DIR}/include/*.h)
-
-set(UDS_SOURCES PUBLIC 
+# Define the source files
+set(UDS_SOURCES 
 	${CMAKE_CURRENT_SOURCE_DIR}/deps/isotp-c/deps/bitfield-c/src/bitfield/8byte.c
 	${CMAKE_CURRENT_SOURCE_DIR}/deps/isotp-c/deps/bitfield-c/src/bitfield/bitarray.c
 	${CMAKE_CURRENT_SOURCE_DIR}/deps/isotp-c/deps/bitfield-c/src/bitfield/bitfield.c
@@ -30,7 +27,7 @@ set(UDS_SOURCES PUBLIC
 
 
 # Define common include directories
-set(COMMON_INCLUDE_UDS PUBLIC
+set(COMMON_INCLUDE_UDS
     ${CMAKE_CURRENT_SOURCE_DIR}/deps/isotp-c
     ${CMAKE_CURRENT_SOURCE_DIR}/deps/isotp-c/deps/bitfield-c/src
     ${CMAKE_CURRENT_SOURCE_DIR}/deps/isotp-c/deps/bitfield-c/src/bitfield
@@ -57,14 +54,3 @@ set_target_properties(uds PROPERTIES
     ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/lib
 )
 
-# # Post-build command to display file size
-# add_custom_command(TARGET uds
-#     POST_BUILD
-#     COMMAND ${CMAKE_COMMAND} -E size ${CMAKE_CURRENT_BINARY_DIR}/lib/libuds.a
-# )
-
-# Install target (optional)
-#install(TARGETS uds
-#    ARCHIVE DESTINATION lib
-#    PUBLIC_HEADER DESTINATION include
-#)
