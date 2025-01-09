@@ -3,24 +3,6 @@ project(uds LANGUAGES C)
 
 # Define the source files
 set(UDS_SOURCES 
-	${CMAKE_CURRENT_SOURCE_DIR}/deps/isotp-c/deps/bitfield-c/src/bitfield/8byte.c
-	${CMAKE_CURRENT_SOURCE_DIR}/deps/isotp-c/deps/bitfield-c/src/bitfield/bitarray.c
-	${CMAKE_CURRENT_SOURCE_DIR}/deps/isotp-c/deps/bitfield-c/src/bitfield/bitfield.c
-	${CMAKE_CURRENT_SOURCE_DIR}/deps/isotp-c/deps/bitfield-c/src/canutil/read.c
-	${CMAKE_CURRENT_SOURCE_DIR}/deps/isotp-c/deps/bitfield-c/src/canutil/write.c
-	${CMAKE_CURRENT_SOURCE_DIR}/deps/isotp-c/deps/bitfield-c/tests/8byte_tests.c
-	${CMAKE_CURRENT_SOURCE_DIR}/deps/isotp-c/deps/bitfield-c/tests/bitfield_tests.c
-	${CMAKE_CURRENT_SOURCE_DIR}/deps/isotp-c/deps/bitfield-c/tests/read_tests.c
-	${CMAKE_CURRENT_SOURCE_DIR}/deps/isotp-c/deps/bitfield-c/tests/write_tests.c
-	${CMAKE_CURRENT_SOURCE_DIR}/deps/isotp-c/src/isotp/allocate.c
-	${CMAKE_CURRENT_SOURCE_DIR}/deps/isotp-c/src/isotp/isotp.c
-	${CMAKE_CURRENT_SOURCE_DIR}/deps/isotp-c/src/isotp/receive.c
-	${CMAKE_CURRENT_SOURCE_DIR}/deps/isotp-c/src/isotp/send.c
-	${CMAKE_CURRENT_SOURCE_DIR}/deps/isotp-c/tests/common.c
-	${CMAKE_CURRENT_SOURCE_DIR}/deps/isotp-c/tests/test_allocate.c
-	${CMAKE_CURRENT_SOURCE_DIR}/deps/isotp-c/tests/test_core.c
-	${CMAKE_CURRENT_SOURCE_DIR}/deps/isotp-c/tests/test_receive.c
-	${CMAKE_CURRENT_SOURCE_DIR}/deps/isotp-c/tests/test_send.c
 	${CMAKE_CURRENT_SOURCE_DIR}/src/uds/extras.c
 	${CMAKE_CURRENT_SOURCE_DIR}/src/uds/uds.c
 )
@@ -28,16 +10,17 @@ set(UDS_SOURCES
 
 # Define common include directories
 set(COMMON_INCLUDE_UDS
-    ${CMAKE_CURRENT_SOURCE_DIR}/deps/isotp-c
-    ${CMAKE_CURRENT_SOURCE_DIR}/deps/isotp-c/deps/bitfield-c/src
-    ${CMAKE_CURRENT_SOURCE_DIR}/deps/isotp-c/deps/bitfield-c/src/bitfield
-    ${CMAKE_CURRENT_SOURCE_DIR}/deps/isotp-c/deps/bitfield-c/src/canutil
-    ${CMAKE_CURRENT_SOURCE_DIR}/deps/isotp-c/src
     ${CMAKE_CURRENT_SOURCE_DIR}/src/uds  # Add the src directory for uds/
 )
 
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/deps/isotp-c)
+
+
+
 # Add the UDS library as a static library
 add_library(uds STATIC ${UDS_SOURCES})
+
+target_link_libraries(uds isotp)
 
 # Include directories for UDS
 target_include_directories(uds PUBLIC ${COMMON_INCLUDE_UDS})
