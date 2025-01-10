@@ -13,7 +13,7 @@ set(COMMON_INCLUDE_UDS
     ${CMAKE_CURRENT_SOURCE_DIR}/src/uds  # Add the src directory for uds/
 )
 
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/deps/isotp-c)
+add_subdirectory("deps/isotp-c")
 
 
 
