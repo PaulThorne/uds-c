@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.10)
 project(uds LANGUAGES C)
 
+include(AddGitSubmodule.cmake)
+
 # Define the source files
 set(UDS_SOURCES 
 	${CMAKE_CURRENT_SOURCE_DIR}/src/uds/extras.c
@@ -13,8 +15,7 @@ set(COMMON_INCLUDE_UDS
     ${CMAKE_CURRENT_SOURCE_DIR}/src/uds  # Add the src directory for uds/
 )
 
-add_subdirectory("deps/isotp-c")
-
+add_git_submodule("deps/isotp-c")
 
 
 # Add the UDS library as a static library
